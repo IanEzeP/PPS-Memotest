@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="this.usrName != ''">{{ this.usrName }}</ion-title>
+    <ion-title *ngIf="this.usrName == ''">Nombre de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="menu">
+    <h1>Memotest</h1>
+
+    <h2>Elija la dificultad</h2>
+    <ion-button class="element" color="success" (click)="this.onDificult('facil')" expand="block">Fácil</ion-button>
+    <ion-button class="element" color="warning" (click)="this.onDificult('medio')" expand="block">Medio</ion-button>
+    <ion-button class="element" color="danger" (click)="this.onDificult('dificil')" expand="block">Difícil</ion-button>
+
+    <h2>Consultar mejores tiempos</h2>
+    <ion-button class="element" color="primary" (click)="this.onLeaderboard()" expand="block">Tabla de posiciones</ion-button>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-button aria-label="Logout" color="danger" (click)="this.cerrarSesion()">
+    Cerrar Sesión
+  </ion-button>
+</ion-footer>

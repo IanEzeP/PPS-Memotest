@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>TABLA DIDACTICA</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div>
+    <h1>Bienvenido al Memotest</h1>
+    <h2>¿Listo para desafiar tu memoria?</h2>
+
+    <form class="needs-validation" [formGroup]="formLog">
+      
+      <ion-input label="Correo" type="email" labelPlacement="floating" formControlName="email"></ion-input>
+      <ion-input label="Clave" type="password" labelPlacement="floating" formControlName="password"></ion-input>
+      <ion-button color="danger" expand="block" (click)="this.iniciarSesion()">Jugar</ion-button> <!-- Cambiar por botón con imágen de juagar, sin texto -->
+    </form>
+    
+    <div *ngIf="this.cargaFin == true; then mostrar else esperar"></div>
+
+    <ng-template #mostrar>
+      
+      <ion-button color="warning" expand="block" *ngFor="let item of arrayTestUsers" (click)="onQuickUser(item)">
+        <ion-icon name="person-circle-outline"></ion-icon>{{item.perfil}}
+      </ion-button>
+    </ng-template>
+    <ng-template #esperar>
+
+      <ion-button color="warning" expand="block" >Cargando usuario...</ion-button>
+      <ion-button color="warning" expand="block" >Cargando usuario...</ion-button>
+      <ion-button color="warning" expand="block" >Cargando usuario...</ion-button>
+    </ng-template>
+  </div>
+</ion-content>
+
