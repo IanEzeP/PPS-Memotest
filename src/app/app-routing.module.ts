@@ -21,8 +21,6 @@ const routes: Routes = [
     path: 'juego/:dificultad',
     loadChildren: () => import('./juego/juego.module').then( m => m.JuegoPageModule)
   },
-
-  //anim-splash
 ];
 @NgModule({
   imports: [
