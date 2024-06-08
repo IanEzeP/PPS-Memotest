@@ -1,0 +1,38 @@
+ion-content {
+    --background: var(--ion-color-warning);
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+@-webkit-keyframes rotate-90-cw{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}}@keyframes rotate-90-cw{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}}
+.logo {
+    height: 200px;
+    margin-top: 30%;
+    -webkit-animation:rotate-90-cw .4s cubic-bezier(.25,.46,.45,.94) 0.8s both;animation:rotate-90-cw .4s cubic-bezier(.25,.46,.45,.94) 0.8s both
+}
+
+@-webkit-keyframes scale-up-ver-top{0%{-webkit-transform:scaleY(0);transform:scaleY(0);-webkit-transform-origin:100% 0;transform-origin:100% 0}100%{-webkit-transform:scaleY(1);transform:scaleY(1);-webkit-transform-origin:100% 0;transform-origin:100% 0}}@keyframes scale-up-ver-top{0%{-webkit-transform:scaleY(0);transform:scaleY(0);-webkit-transform-origin:100% 0;transform-origin:100% 0}100%{-webkit-transform:scaleY(1);transform:scaleY(1);-webkit-transform-origin:100% 0;transform-origin:100% 0}}
+.txt1 {
+    margin-top: 40%;
+
+    background-color: var(--primary-color);
+    color: var(--ion-color-secondary);
+    font-weight: 600;
+    font-size: 30px;
+
+    -webkit-animation:scale-up-ver-top .8s cubic-bezier(.39,.575,.565,1.000) 1s reverse both;animation:scale-up-ver-top .8s cubic-bezier(.39,.575,.565,1.000) 1s reverse both
+}
+
+@-webkit-keyframes scale-up-ver-bottom{0%{-webkit-transform:scaleY(0);transform:scaleY(0);-webkit-transform-origin:0 100%;transform-origin:0 100%}100%{-webkit-transform:scaleY(1);transform:scaleY(1);-webkit-transform-origin:0 100%;transform-origin:0 100%}}@keyframes scale-up-ver-bottom{0%{-webkit-transform:scaleY(0);transform:scaleY(0);-webkit-transform-origin:0 100%;transform-origin:0 100%}100%{-webkit-transform:scaleY(1);transform:scaleY(1);-webkit-transform-origin:0 100%;transform-origin:0 100%}}
+.txt2 {
+    margin-top: 30%;
+
+    background-color: var(--primary-color);
+    color: var(--ion-color-secondary);
+    font-weight: 600;
+    font-size: 30px;
+    -webkit-animation:scale-up-ver-bottom .8s cubic-bezier(.39,.575,.565,1.000) 1s reverse both;animation:scale-up-ver-bottom .8s cubic-bezier(.39,.575,.565,1.000) 1s reverse both;
+}

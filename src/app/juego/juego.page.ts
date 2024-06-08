@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from '../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-juego',
@@ -11,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 export class JuegoPage implements OnInit {
 
   public dificultad: any;
+  public showDificultad: string = '';
   public cartasArray: Array<any> = [];
 
   public aciertosConseguidos: number = 0;
@@ -25,12 +29,12 @@ export class JuegoPage implements OnInit {
 
   rxjsTimer = timer(0, 1000);
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router, private firestore: AngularFirestore,
+    private auth: AuthService) {}
 
   ngOnInit() 
   {
     this.dificultad = this.route.snapshot.paramMap.get('dificultad');
-    console.log(this.dificultad);
 
     this.cargarCartas();
     this.cargarTimer();
@@ -38,7 +42,7 @@ export class JuegoPage implements OnInit {
 
   cargarTimer()
   {
-    this.rxjsTimer.pipe(takeUntil(this.destroy)).subscribe(val => {
+    this.rxjsTimer.pipe(takeUntil(this.destroy)).subscribe((val:any) => {
       this.timer = val;
 
       if (this.juegoTerminado == true) {
@@ -67,6 +71,8 @@ export class JuegoPage implements OnInit {
         {
           this.juegoTerminado = true;
           console.log("Termino el juego");
+
+          this.finalizarJuego()
         }
       }
       else
@@ -93,13 +99,50 @@ export class JuegoPage implements OnInit {
     }
   }
 
+  async finalizarJuego()
+  {
+    let id_imagen = this.firestore.createId();
+    const documento = this.firestore.doc("puntos-memotest/" + id_imagen);
+    documento.set(
+    {
+      tiempo : this.timer,
+      usuario: this.auth.nombre,
+      dificultad: this.dificultad,
+      fecha: new Date(),
+    });
+
+    await Swal.fire(
+      {
+        heightAuto: false,
+        title: "Partida finalizada",
+        text: "Tiempo total: " + this.timer + " segundos",
+        showDenyButton: true,
+        denyButtonColor: "#5DE2E7",
+        denyButtonText: "Volver al menú",
+        confirmButtonColor: "#7DDA58",
+        confirmButtonText: "Ver tabla de puntuación",
+      }
+    ).then((result) => {
+      if (result.isConfirmed) 
+      {
+        this.router.navigateByUrl('/puntuacion');
+      }
+      else if (result.isDenied)
+      {
+        this.router.navigateByUrl('/main');  
+      }
+    });
+  }
+
   cargarCartas() 
   {
     let contador = 0;
     let arrayTmp = [];
+
     switch (this.dificultad) 
     {
       case 'facil':
+        this.showDificultad = 'Fácil';
         while (contador < 3)
         {
           arrayTmp[contador] = { img: '', id: contador, visible: false};
@@ -109,58 +152,46 @@ export class JuegoPage implements OnInit {
         arrayTmp[1].img = 'assets/imagenes/animals/lion.png';
         arrayTmp[2].img = 'assets/imagenes/animals/sheep.png';
 
-        arrayTmp.forEach(carta => {
-          let clon = { img: carta.img, id: carta.id, visible: false};
-          this.cartasArray.push(carta);
-          this.cartasArray.push(clon);
-        });
-
-        this.aleatorizarArray();
         break;
       case 'medio':
+        this.showDificultad = 'Medio';
         while (contador < 5)
         {
           arrayTmp[contador] = { img: '', id: contador, visible: false};
           contador++;
         }
-        arrayTmp[0].img = '../../assets/';
-        arrayTmp[1].img = '../../assets/';
-        arrayTmp[2].img = '../../assets/';
-        arrayTmp[3].img = '../../assets/';
-        arrayTmp[4].img = '../../assets/';
+        arrayTmp[0].img = 'assets/imagenes/tools/tool-1.png';
+        arrayTmp[1].img = 'assets/imagenes/tools/tool-2.png';
+        arrayTmp[2].img = 'assets/imagenes/tools/tool-3.png';
+        arrayTmp[3].img = 'assets/imagenes/tools/tool-4.png';
+        arrayTmp[4].img = 'assets/imagenes/tools/tool-5.png';
 
-        arrayTmp.forEach(carta => {
-          let clon = { img: carta.img, id: carta.id, visible: false};
-          this.cartasArray.push(carta);
-          this.cartasArray.push(clon);
-        });
-
-        this.aleatorizarArray();
         break;
       case 'dificil':
+        this.showDificultad = 'Difícil';
         while (contador < 8)
         {
           arrayTmp[contador] = { img: '', id: contador, visible: false};
           contador++;
         }
-        arrayTmp[0].img = '../../assets/';
-        arrayTmp[1].img = '../../assets/';
-        arrayTmp[2].img = '../../assets/';
-        arrayTmp[3].img = '../../assets/';
-        arrayTmp[4].img = '../../assets/';
-        arrayTmp[5].img = '../../assets/';
-        arrayTmp[6].img = '../../assets/';
-        arrayTmp[7].img = '../../assets/';
+        arrayTmp[0].img = 'assets/imagenes/fruits/fruit-1.png';
+        arrayTmp[1].img = 'assets/imagenes/fruits/fruit-2.png';
+        arrayTmp[2].img = 'assets/imagenes/fruits/fruit-3.png';
+        arrayTmp[3].img = 'assets/imagenes/fruits/fruit-4.png';
+        arrayTmp[4].img = 'assets/imagenes/fruits/fruit-5.png';
+        arrayTmp[5].img = 'assets/imagenes/fruits/fruit-6.png';
+        arrayTmp[6].img = 'assets/imagenes/fruits/fruit-7.png';
+        arrayTmp[7].img = 'assets/imagenes/fruits/fruit-8.png';
 
-        arrayTmp.forEach(carta => {
-          let clon = { img: carta.img, id: carta.id, visible: false};
-          this.cartasArray.push(carta);
-          this.cartasArray.push(clon);
-        });
-
-        this.aleatorizarArray();
         break;
     }
+    arrayTmp.forEach(carta => {
+      let clon = { img: carta.img, id: carta.id, visible: false};
+      this.cartasArray.push(carta);
+      this.cartasArray.push(clon);
+    });
+
+    this.aleatorizarArray();
 
     this.aciertosTotales = this.cartasArray.length / 2;
   }

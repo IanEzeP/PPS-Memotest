@@ -20,8 +20,8 @@ ion-col {
 }
 
 ion-button.easy {
-    height: 230px;
-    margin: 1px 1px 1px;
+    height: 235px;
+    margin: 2px 1px 2px;
     display: block;
     border: solid 5px #005800;
     border-radius: 10px;
@@ -29,8 +29,8 @@ ion-button.easy {
 }
 
 ion-button.medium {
-    height: 140px;
-    margin: 0.5px 1px 0.5px;
+    height: 143px;
+    margin: 0px 1px 0px;
     display: block;
     border: solid 5px #005800;
     border-radius: 10px;
@@ -38,8 +38,10 @@ ion-button.medium {
 }
 
 ion-button.hard {
-    height: 160px;
-    margin: 3px 3px 3px;
+    height: 170px;
+    margin-top: 6px;
+    margin-left: 1px;
+    margin-right: 1px;
     display: block;
     border: solid 5px #005800;
     border-radius: 10px;
@@ -60,13 +62,13 @@ div.juego {
 }
 
 h2 {
-    margin-left: 35%;
-    margin-top: 30px;
+    margin-left: 32%;
+    margin-top: 20px;
     font-size: 28px;
     font-weight: 700;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: var(--primary-color);
     color: #ffffffea;
     
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }

@@ -1,46 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="secondary">
     <ion-buttons slot="start">
       <ion-back-button default-href="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>juego</ion-title>
+    <ion-title>Dificultad: {{this.showDificultad}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div>
-    <h2>Tiempo: {{this.timer}}</h2>
-    <!-- Timer cuando empieza el juego, siempre visible, se detiene al ganar -->
-    <ion-grid>
+    <h2>Tiempo: {{this.timer}}s</h2>
       <div *ngIf="this.dificultad == 'facil'">
-        <ion-row>
-          <ion-col size="6" *ngFor="let carta of this.cartasArray; let i = index">
-            <ion-button class="easy" id="{{i}}" (click)="onTurnCarta(carta.id, i)" 
-            [ngStyle]="{'--background': carta.visible ? 'url(' + carta.img + ') no-repeat center center / cover' : 'url(assets/imagenes/cartaEasy.png) no-repeat center center / cover'}">
-            </ion-button>
-          </ion-col>
-        </ion-row>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor="let carta of this.cartasArray; let i = index">
+              <ion-button class="easy" id="{{i}}" (click)="onTurnCarta(carta.id, i)" 
+              [ngStyle]="{'--background': carta.visible ? 'url(' + carta.img + ') no-repeat center center / cover' : 'url(assets/imagenes/cartaEasy.png) no-repeat center center / cover'}">
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
       <div *ngIf="this.dificultad == 'medio'">
-        <ion-row>
-          <ion-col size="6" *ngFor="let carta of this.cartasArray; let i = index">
-            <ion-button class="medium" id="{{i}}" (click)="onTurnCarta(carta.id, i)" 
-            [ngStyle]="{'--background': carta.visible ? 'url(' + carta.img + ') no-repeat center center / cover' : 'url(assets/imagenes/cartaMedium.png) no-repeat center center / cover'}">
-              {{carta.id}}
-            </ion-button>
-          </ion-col>
-        </ion-row>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor="let carta of this.cartasArray; let i = index">
+              <ion-button class="medium" id="{{i}}" (click)="onTurnCarta(carta.id, i)" 
+              [ngStyle]="{'--background': carta.visible ? 'url(' + carta.img + ') no-repeat center center / cover' : 'url(assets/imagenes/cartaMedium.png) no-repeat center center / cover'}">
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
       <div *ngIf="this.dificultad == 'dificil'">
-        <ion-row>
-          <ion-col size="3" *ngFor="let carta of this.cartasArray; let i = index">
-            <ion-button class="hard" id="{{i}}" (click)="onTurnCarta(carta.id, i)" 
-            [ngStyle]="{'--background': carta.visible ? 'url(' + carta.img + ') no-repeat center center / cover' : 'url(assets/imagenes/cartaHard.png) no-repeat center center / cover'}">
-            {{carta.id}}
-          </ion-button>
-          </ion-col>
-        </ion-row>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3" *ngFor="let carta of this.cartasArray; let i = index">
+              <ion-button class="hard" id="{{i}}" (click)="onTurnCarta(carta.id, i)" 
+              [ngStyle]="{'--background': carta.visible ? 'url(' + carta.img + ') no-repeat center center / cover' : 'url(assets/imagenes/cartaHard.png) no-repeat center center / cover'}">
+            </ion-button>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
       </div>
-    </ion-grid>
   </div>
 </ion-content>

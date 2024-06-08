@@ -4,12 +4,16 @@
 }
 
 ion-content {
-    --background: var(--ion-color-success);
+    --background: var(--ion-color-tertiary);
     --overflow: hidden;
 }
 
+ion-title {
+    margin-left: 20px;
+}
+
 h1 {
-    //Posicion center
+    margin-left: 21%;
     margin-top: 30px;
     margin-bottom: 10px;
     font-size: 50px;
@@ -26,9 +30,9 @@ h2 {
     margin-left: 10px;
     font-size: 30px;
     font-weight: 600;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: var(--primary-color);
-    color: #ffffffea;
+    color: var(--ion-color-secondary)
 }
 
 div.menu {
@@ -40,11 +44,11 @@ div.menu {
 
 ion-button.element {
     display: block;
-    height: 80px;
+    height: 90px;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
-    margin-bottom: 2%;
-    margin-top: 6%;
+    margin-bottom: 1.5%;
+    margin-top: 7%;
 
     font-size: 20px;
     font-weight: 600;

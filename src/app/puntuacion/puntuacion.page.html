@@ -1,13 +1,48 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>puntuacion</ion-title>
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="onVolver()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Tabla de puntuación</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">puntuacion</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="tabla">
+    <ion-segment value="facil" (ionChange)="onChangeDif($event)">
+      <ion-segment-button value="facil">
+        <ion-label>Fácil</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="medio">
+        <ion-label>Medio</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="dificil">
+        <ion-label>Difícil</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <h1>Mejores 5 registros:</h1>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="head">Nombre</ion-col>
+        <ion-col class="head">Tiempo</ion-col>
+        <ion-col class="head">Fecha</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let user of this.topPuntos">
+        <ion-col class="body">{{user.usuario}}</ion-col>
+        <ion-col class="body">{{user.tiempo}} segundos</ion-col>
+        <ion-col class="body">{{user.fecha}}</ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div *ngIf="this.dificultad == 'facil'">
+      <img src="../../assets/imagenes/animals/elephant.png">
+    </div>
+    <div *ngIf="this.dificultad == 'medio'">
+      <img src="../../assets/imagenes/tools/tool-5.png">
+    </div>
+    <div *ngIf="this.dificultad == 'dificil'">
+      <img src="../../assets/imagenes/fruits/fruit-5.png" height="400" width="400">
+    </div>
+  </div>
 </ion-content>
